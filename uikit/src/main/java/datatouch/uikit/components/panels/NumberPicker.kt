@@ -66,6 +66,12 @@ class NumberPicker : PopUpPanel {
         setupToolsClicks()
     }
 
+    override fun onDismissInternal() {
+        super.onDismissInternal()
+        onNumberIntSelected = null
+        onNumberFloatSelected = null
+    }
+
     private fun setupIntFloatPartsClicks() {
         if (mode != INPUT_ONLY_INT) {
             ui?.tvIntPart?.setOnClickListener { switchInputMode(INPUT_INT_PART) }

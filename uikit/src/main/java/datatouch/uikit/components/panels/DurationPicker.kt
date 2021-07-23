@@ -42,6 +42,11 @@ class DurationPicker(initialDuration: DurationTime) : PopUpPanel() {
         setupQuickDurationClicks()
     }
 
+    override fun onDismissInternal() {
+        super.onDismissInternal()
+        onDurationSelected = null
+    }
+
     private fun setupHoursMinutesClicks() {
         ui?.tvHours?.setOnClickListener { switchInputMode(INPUT_HOURS) }
         ui?.tvMinutes?.setOnClickListener { switchInputMode(INPUT_MINUTES) }

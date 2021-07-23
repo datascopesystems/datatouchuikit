@@ -26,6 +26,11 @@ abstract class PopUpPanel {
     private val uiBindingInjector = UiBindingInjector()
     protected abstract val uiBindingProperty: KProperty<ViewBinding?>
 
+    private var parentView: View? = null
+    private var isParentViewClickable = false
+
+    private var isParentViewClicksDisabled = false
+
     protected fun setKeyboardHidden(hidden: Boolean) {
         softInputMode = when (hidden) {
             true -> WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -35,8 +40,15 @@ abstract class PopUpPanel {
     }
 
     private fun createPopup(parentView: View?, callback: UiJustCallback) {
-        this.context = parentView?.context
+        if (parentView == null) return
+
+        this.parentView = parentView
+        this.context = parentView.context
+
+        isParentViewClickable = parentView.isClickable
+
         if (popupWindow == null) {
+            if (isParentViewClicksDisabled) { parentView.isClickable = false }
             setupPopupWindow(context)
             onCreationComplete()
             callback.invoke()
@@ -69,8 +81,10 @@ abstract class PopUpPanel {
         }
     }
 
-    private fun onDismissInternal() {
+    protected open fun onDismissInternal() {
         uiBindingInjector.releaseInjected()
+        parentView?.isClickable = isParentViewClickable
+        parentView = null
         context = null
         popupWindow?.setOnDismissListener(null)
         popupWindow?.contentView = null
@@ -115,7 +129,10 @@ abstract class PopUpPanel {
         popupWindow?.dismiss()
     }
 
-    fun showCentered(parentView: View?) = createPopup(parentView) {
-        popupWindow?.showAtLocation(parentView, Gravity.CENTER, 0, 0)
+    fun showCentered(parentView: View?, disablePatentViewClicks: Boolean = true) {
+        isParentViewClicksDisabled = disablePatentViewClicks
+        createPopup(parentView) {
+            popupWindow?.showAtLocation(parentView, Gravity.CENTER, 0, 0)
+        }
     }
 }
