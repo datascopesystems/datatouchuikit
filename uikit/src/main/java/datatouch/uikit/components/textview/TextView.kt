@@ -3,6 +3,7 @@ package datatouch.uikit.components.textview
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -58,6 +59,7 @@ class TextView : RelativeLayout {
         }
 
     private var typeface: Typeface? = null
+    private var isStrikeThrough = false
 
     constructor(context: Context?) : super(context) {
         init()
@@ -153,6 +155,8 @@ class TextView : RelativeLayout {
 
             maxLength = typedArray.getInt(R.styleable.TextView_tv_max_length, InvalidMaxLength)
 
+            isStrikeThrough = typedArray.getBoolean(R.styleable.TextView_tv_strikethrough, false)
+
         } finally {
             typedArray.recycle()
         }
@@ -180,6 +184,8 @@ class TextView : RelativeLayout {
 
         setupMaxLines()
         setMaxLength()
+
+        setStrikeThroughIfRequired()
     }
 
     private fun setupIconDrawable(iv: ImageView, iconDrawable: Drawable?) {
@@ -303,6 +309,11 @@ class TextView : RelativeLayout {
     fun setEndIconDrawable(iconDrawable: Drawable?) {
         this.endIconDrawable = iconDrawable
         setupIconDrawable(ui.ivEndIcon, endIconDrawable)
+    }
+
+    private fun setStrikeThroughIfRequired() {
+        if (isStrikeThrough)
+            ui.tvTextView.paintFlags = ui.tvTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
     }
 
 }

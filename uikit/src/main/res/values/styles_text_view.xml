@@ -32,6 +32,7 @@
         </attr>
 
         <attr name="tv_font_size" format="dimension"/>
+        <attr name="tv_strikethrough" format="boolean"/>
 
     </declare-styleable>
 
