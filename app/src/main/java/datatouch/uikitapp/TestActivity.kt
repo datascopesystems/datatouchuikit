@@ -3,6 +3,7 @@ package datatouch.uikitapp
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import datatouch.uikit.components.textview.Font
 import datatouch.uikit.components.textview.TextView
 
 
@@ -18,7 +19,7 @@ class TestActivity : AppCompatActivity() {
 
 
         btn.setOnClickListener {
-            tv.setStrikeThrough(!tv.isStrikeThrough)
+            tv.setTypeFace(Font.Bold)
         }
 
     }

@@ -325,6 +325,11 @@ class TextView : RelativeLayout {
         setStrikeThrough()
     }
 
+    fun setTypeFace(font : Font) {
+        this.font = font
+        setupTypeface()
+    }
+
 }
 
 private const val InvalidColor = -666
