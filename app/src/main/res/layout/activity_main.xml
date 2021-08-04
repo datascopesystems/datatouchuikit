@@ -8,8 +8,15 @@
   <datatouch.uikit.components.textview.TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:id="@+id/tv"
       app:tv_strikethrough="true"
       app:tv_text="@string/quit_wizard"/>
+
+  <Button
+      android:id="@+id/btn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="test"/>
 
 
 </LinearLayout>

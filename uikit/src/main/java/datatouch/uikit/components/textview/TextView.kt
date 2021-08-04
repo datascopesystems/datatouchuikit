@@ -59,7 +59,9 @@ class TextView : RelativeLayout {
         }
 
     private var typeface: Typeface? = null
-    private var isStrikeThrough = false
+
+    var isStrikeThrough = false
+        private set
 
     constructor(context: Context?) : super(context) {
         init()
@@ -185,7 +187,7 @@ class TextView : RelativeLayout {
         setupMaxLines()
         setMaxLength()
 
-        setStrikeThroughIfRequired()
+        this.setStrikeThrough()
     }
 
     private fun setupIconDrawable(iv: ImageView, iconDrawable: Drawable?) {
@@ -311,9 +313,16 @@ class TextView : RelativeLayout {
         setupIconDrawable(ui.ivEndIcon, endIconDrawable)
     }
 
-    private fun setStrikeThroughIfRequired() {
+    private fun setStrikeThrough() {
         if (isStrikeThrough)
             ui.tvTextView.paintFlags = ui.tvTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        else if ((ui.tvTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG) > 0) // If flag is set up
+            ui.tvTextView.paintFlags = ui.tvTextView.paintFlags xor Paint.STRIKE_THRU_TEXT_FLAG
+    }
+
+    fun setStrikeThrough(isStrikeThrough: Boolean) {
+        this.isStrikeThrough = isStrikeThrough
+        setStrikeThrough()
     }
 
 }
