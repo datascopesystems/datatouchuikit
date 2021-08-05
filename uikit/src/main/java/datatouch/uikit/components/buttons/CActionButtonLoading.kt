@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import datatouch.uikit.R
+import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.GenericExtensions.default
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.databinding.ActionButtonLoadingBinding
@@ -160,21 +161,36 @@ class CActionButtonLoading : FrameLayout {
         }
     }
 
-    fun showLoadingState() {
-        this.showLoading(true)
+    fun showLoadingState(timeout: Long = 0) {
+        this.showLoading(true, timeout)
     }
 
     fun hideLoadingState() {
         this.showLoading(false)
     }
 
-    fun showLoading(loading: Boolean) {
+    fun showLoading(loading: Boolean, timeout: Long = 0) {
+        if (isLoading() == loading) return
+
         ui.llBtnContainer.isEnabled = !loading
         ui.ivIcon.isVisible = !loading
         ui.progressBar.isVisible = loading
+
+        if (loading && timeout > 0) {
+            ui.root.postDelayed(::hideLoadingState, timeout)
+        }
     }
 
     fun isLoading(): Boolean {
         return ui.progressBar.isVisible
+    }
+
+    fun setOnClickListenerNonLoading(timeout: Long = 0, callback: UiJustCallback) {
+        super.setOnClickListener {
+            if (!isLoading()) {
+                showLoadingState(timeout)
+                callback.invoke()
+            }
+        }
     }
 }
