@@ -9,7 +9,7 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import datatouch.uikit.R
-import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.callbacks.UiCallback
 import datatouch.uikit.core.extensions.GenericExtensions.default
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.databinding.ActionButtonLoadingBinding
@@ -185,11 +185,11 @@ class CActionButtonLoading : FrameLayout {
         return ui.progressBar.isVisible
     }
 
-    fun setOnClickListenerNonLoading(timeout: Long = 0, callback: UiJustCallback) {
+    fun setOnClickListenerNonLoading(loading: Boolean = false, callback: UiCallback<CActionButtonLoading>) {
         super.setOnClickListener {
             if (!isLoading()) {
-                showLoadingState(timeout)
-                callback.invoke()
+                if (loading) { showLoadingState() }
+                callback.invoke(this)
             }
         }
     }
