@@ -4,9 +4,9 @@ import datatouch.uikit.core.fragmentsignaling.interfaces.ISlotIdOwner
 import kotlin.reflect.KProperty
 
 internal fun ISlotIdOwner.assignSlotNameFromProperty(srcProperty: KProperty<*>) {
-    if (slotId.hasSlotName()) {
+    if (getSlotId().hasSlotName()) {
         return
     }
 
-    slotId.assignSlotName(srcProperty.name)
+    getSlotId().assignSlotName(srcProperty.name)
 }

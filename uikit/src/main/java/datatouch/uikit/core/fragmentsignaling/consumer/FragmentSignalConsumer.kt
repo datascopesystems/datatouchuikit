@@ -1,6 +1,8 @@
 package datatouch.uikit.core.fragmentsignaling.consumer
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.CoroutineScope
 
 internal class FragmentSignalConsumer : SignalConsumer() {
     private var fragment: Fragment? = null
@@ -22,4 +24,7 @@ internal class FragmentSignalConsumer : SignalConsumer() {
         fragment = null
     }
 
+    override fun getCoroutineScope(): CoroutineScope? {
+        return fragment?.lifecycleScope
+    }
 }

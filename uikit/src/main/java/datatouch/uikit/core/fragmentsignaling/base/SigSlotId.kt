@@ -8,7 +8,7 @@ class SigSlotId(private val consumerName: String,
 
     private var slotName: String? = null
 
-    fun isBelongsToConsumer(consumerName: String): Boolean {
+    private fun isBelongsToConsumer(consumerName: String): Boolean {
         return when (isNotEmpty()) {
             true -> this.consumerName == consumerName
             else -> false

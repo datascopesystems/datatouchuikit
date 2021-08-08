@@ -14,7 +14,7 @@ internal abstract class SigFunInvokerProperty<V : ISlotIdOwner> : ISigFunPropert
     private var sigSlotId = SigSlotId.createEmpty()
 
     override fun setValue(thisRef: Fragment, property: KProperty<*>, value: V) {
-        setSigSlotId(thisRef, property, value.slotId)
+        setSigSlotId(thisRef, property, value.getSlotId())
     }
 
     protected fun getSharedViewModel(fragment: Fragment): SignalSharedViewModel {

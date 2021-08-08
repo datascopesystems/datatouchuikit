@@ -17,12 +17,16 @@ internal class SignalSharedViewModel : ViewModel() {
     private val flow = MutableSharedFlow<ISignal>(extraBufferCapacity = BUFFER_SIZE)
 
     fun emitSignal(signal: ISignal) {
+        if (signal.isEmptySlotId()) return
+
         this.viewModelScope.launch(Dispatchers.IO) {
             flow.emit(signal)
         }
     }
 
     fun emitSignalBlocking(signal: ISignal) {
+        if (signal.isEmptySlotId()) return
+
         val coroutineFinishCondition = ConditionVariable() // Blocked state
 
         this.viewModelScope.launch(Dispatchers.IO) {
