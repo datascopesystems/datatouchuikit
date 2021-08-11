@@ -1,6 +1,7 @@
 package datatouch.uikit.core.extensions
 
 import androidx.viewbinding.ViewBinding
+import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNull
 import java.lang.reflect.ParameterizedType
 
@@ -19,11 +20,16 @@ object ViewBindingExtensions {
             layoutClass =
                 (viewClass.genericSuperclass as? ParameterizedType?)?.actualTypeArguments?.firstOrNull() as? Class<TLayout>?
         }
+        layoutClass?.apply {
 
+        }
         if (layoutClass == null)
             return getBindingClassName(viewClass.superclass)
 
         return layoutClass!!
     }
 
+    fun ViewBinding.runInUiThread(action: UiJustCallback) {
+        root.post(action)
+    }
 }
