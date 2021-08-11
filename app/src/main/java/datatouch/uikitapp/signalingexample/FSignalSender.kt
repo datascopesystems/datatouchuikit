@@ -5,12 +5,12 @@ import datatouch.uikit.R
 import datatouch.uikit.components.appbackground.AppBackgroundBundle
 import datatouch.uikit.components.windows.base.DefaultFullScreenWindowUiBind
 import datatouch.uikit.core.extensions.GenericExtensions.default
-import datatouch.uikit.core.fragmentargs.FragmentArgs
-import datatouch.uikit.core.fragmentargs.extension.putArg
 import datatouch.uikit.core.fragmentsignaling.SigFactory
-import datatouch.uikit.core.fragmentsignaling.variation.sigfun.SigFun2
 import datatouch.uikit.core.fragmentsignaling.variation.extension.putSignal
+import datatouch.uikit.core.fragmentsignaling.variation.sigfun.SigFun2
 import datatouch.uikit.core.fragmentsignaling.variation.sigfun.SigFunVoid0
+import datatouch.uikit.core.windowargs.FragmentArgs
+import datatouch.uikit.core.windowargs.putArg
 import datatouch.uikitapp.databinding.FragmentSignalSenderBinding
 
 class FSignalSender : DefaultFullScreenWindowUiBind<FragmentSignalSenderBinding>() {
@@ -18,7 +18,9 @@ class FSignalSender : DefaultFullScreenWindowUiBind<FragmentSignalSenderBinding>
     private var simpleCallback by SigFactory.sigFun().of()
     private var calcSumCallback by SigFactory.sigFun<Int, Int>().of<Float>()
 
-    private var argFromParent by FragmentArgs.of("Default value 1")
+    private var argFromParent by FragmentArgs.ofNullable<String>(null)
+
+    var testArg by FragmentArgs.ofListNullable<String>()
 
 
     fun withArg(arg: String) = apply {
@@ -49,12 +51,14 @@ class FSignalSender : DefaultFullScreenWindowUiBind<FragmentSignalSenderBinding>
 
         ui?.btnCllbackToParent?.setOnClickListener {
             // Callback to parent fragment
+            val p = testArg
             simpleCallback.invoke()
         }
     }
 
     private fun execSumCallback(a: Int, b: Int) {
         // Callback to parent fragment
+        testArg = null
         calcSumCallback.invoke(a, b) {
             // it - return value from parent fragment slot
             ui?.tvSum?.setText(it.toString())
@@ -69,6 +73,7 @@ class FSignalSender : DefaultFullScreenWindowUiBind<FragmentSignalSenderBinding>
             .putArg(FSignalSender::argFromParent, arg)
             .putSignal(FSignalSender::simpleCallback, simpleCallback)
             .putSignal(FSignalSender::calcSumCallback, calcSumCallback)
+            .putArg(FSignalSender::testArg, listOf("aaaaaa"))
     }
 
 

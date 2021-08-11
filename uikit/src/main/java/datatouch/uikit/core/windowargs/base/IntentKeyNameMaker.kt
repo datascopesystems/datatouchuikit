@@ -1,4 +1,4 @@
-package datatouch.uikit.core.activityargs.extension
+package datatouch.uikit.core.windowargs.base
 
 
 private const val KEY_PREFIX = "uikit.extra"

@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import datatouch.uikit.components.toast.ToastNotification
-import datatouch.uikit.core.activityargs.ActivityArgs
-import datatouch.uikit.core.activityargs.extension.putArg
-import datatouch.uikit.core.activityargs.extension.withClass
+import datatouch.uikit.core.extensions.withClass
 import datatouch.uikit.core.fragmentsignaling.SigFactory
+import datatouch.uikit.core.windowargs.ActivityArgs
+import datatouch.uikit.core.windowargs.putArg
 import datatouch.uikitapp.R
 
 class ASignalTest : AppCompatActivity() {

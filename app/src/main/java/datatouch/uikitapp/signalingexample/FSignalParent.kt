@@ -4,9 +4,9 @@ import datatouch.uikit.R
 import datatouch.uikit.components.appbackground.AppBackgroundBundle
 import datatouch.uikit.components.toast.ToastNotification
 import datatouch.uikit.components.windows.base.DefaultFullScreenWindowUiBind
-import datatouch.uikit.core.fragmentargs.FragmentArgs
 import datatouch.uikit.core.fragmentsignaling.SigFactory
 import datatouch.uikit.core.fragmentsignaling.variation.sigfun.SigFun1
+import datatouch.uikit.core.windowargs.FragmentArgs
 import datatouch.uikitapp.databinding.FragmentSignalParentBinding
 
 class FSignalParent : DefaultFullScreenWindowUiBind<FragmentSignalParentBinding>() {
