@@ -1,22 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primary_light_transparent"
     android:orientation="vertical">
 
-  <datatouch.uikit.components.textview.TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/tv"
-      app:tv_strikethrough="true"
-      app:tv_text="@string/quit_wizard"/>
+  <datatouch.uikit.components.edittext.FormEditText
+      android:id="@+id/fet1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
 
-  <Button
-      android:id="@+id/btn"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="test"/>
-
+  <datatouch.uikit.components.edittext.FormEditText
+      android:id="@+id/fet2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
 
 </LinearLayout>
