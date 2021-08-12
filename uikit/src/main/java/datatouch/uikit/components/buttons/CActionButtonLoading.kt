@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiCallback
+import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.GenericExtensions.default
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.databinding.ActionButtonLoadingBinding
@@ -175,6 +176,7 @@ class CActionButtonLoading : FrameLayout {
         ui.llBtnContainer.isEnabled = !loading
         ui.ivIcon.isVisible = !loading
         ui.progressBar.isVisible = loading
+        ui.progressBar.enableIndeterminateMode(loading)
 
         if (loading && timeout > 0) {
             ui.root.postDelayed(::hideLoadingState, timeout)
@@ -190,6 +192,15 @@ class CActionButtonLoading : FrameLayout {
             if (!isLoading()) {
                 if (loading) { showLoadingState() }
                 callback.invoke(this)
+            }
+        }
+    }
+
+    fun setOnClickListenerNonLoading(timeout: Long, callback: UiJustCallback) {
+        super.setOnClickListener {
+            if (!isLoading()) {
+                if (timeout > 0) { showLoadingState(timeout) }
+                callback.invoke()
             }
         }
     }

@@ -33,7 +33,7 @@
             android:visibility="gone"
             app:cpb_background_progressbar_color="@color/secondary_light_transparent"
             app:cpb_background_progressbar_width="2dp"
-            app:cpb_indeterminate_mode="true"
+            app:cpb_indeterminate_mode="false"
             app:cpb_progressbar_color="@color/accent_start_light"
             app:cpb_progressbar_width="2dp"
             app:cpb_show_progressbar_glow="false" />

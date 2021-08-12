@@ -18,6 +18,7 @@ import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.ImageViewExtensions.setColorFilterRes
 import datatouch.uikit.core.extensions.TextViewExtensions.setHintTextColorRes
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
+import datatouch.uikit.core.utils.clicklisteners.doAfterTextChangedDebounced
 import datatouch.uikit.core.utils.views.ViewUtils
 import datatouch.uikit.databinding.FormEditTextBinding
 
@@ -297,6 +298,13 @@ class FormEditText : LinearLayout, IFormView {
     fun setTheme(theme: Theme) {
         this.theme = theme
         setupTheme()
+    }
+
+    fun doAfterTextChangedDebounced(timeout: Long, action: UiJustCallback) {
+        ui.et.doAfterTextChangedDebounced(timeout) {
+            refreshViewsAfterTextChange()
+            action.invoke()
+        }
     }
 
     private fun setupTheme() {
