@@ -45,7 +45,8 @@ abstract class FullScreenWindow<TToolbar : View> : FragmentWindow() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.setContentView(LinearLayout(context))
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        // Causes layout to be invisible on Android 11
+        //dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         dialog.setOnDismissListener { onClose() }
         dialog.setOnKeyListener { _: DialogInterface?, keyCode: Int, event: KeyEvent ->
             if (keyCode == KeyEvent.KEYCODE_BACK) {
