@@ -1,6 +1,8 @@
 package datatouch.uikit.core.windowargs
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import datatouch.uikit.core.windowargs.argsmap.FragmentArgsMap
 import datatouch.uikit.core.windowargs.interfaces.IFragmentArgProperty
 import datatouch.uikit.core.windowargs.converter.ArgsConverter
 import datatouch.uikit.core.windowargs.property.ListArgProperty
@@ -27,6 +29,16 @@ object FragmentArgs {
 
     fun <T : Serializable> ofListNullable(arg: List<T>? = null): IFragmentArgProperty<List<T>?> =
         ListArgPropertyNullable<T>().setInitialValue(arg)
+
+    /**
+     * Creates Bundle() instance and assign it to fragment using f.setArguments(...)
+     * only if fragment has no args bundle yet
+     *
+     * If we want use FragmentArgs just to store some data, and fragment has no any arguments,
+     * then we need to call f.setArguments(...) before fragment added to FragmentManager,
+     * initOnce(...) will do that.
+     */
+    fun initOnce(f: Fragment) = apply { FragmentArgsMap(f) }
 }
 
 // Fragment Arguments Bundle Extensions
