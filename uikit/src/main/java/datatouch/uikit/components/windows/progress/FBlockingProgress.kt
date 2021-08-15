@@ -11,12 +11,13 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import datatouch.uikit.R
 import datatouch.uikit.components.windows.base.PopUpWindowUiBind
+import datatouch.uikit.core.windowargs.FragmentArgs
 import datatouch.uikit.databinding.DialogBlockingProgressBinding
 
 
 class FBlockingProgress() : PopUpWindowUiBind<DialogBlockingProgressBinding>() {
 
-    var isDialogCancelable = false
+    var isDialogCancelable by FragmentArgs.of(false)
 
     private var subMessageText = ""
 
