@@ -68,5 +68,9 @@ class FBlockingProgress() : PopUpWindowUiBind<DialogBlockingProgressBinding>() {
         ui?.tvSubMessage?.text = subMessageText
     }
 
+    fun withDialogCancelable(cancelable: Boolean) = apply {
+        isDialogCancelable = cancelable
+    }
+
     override fun inject() {}
 }
