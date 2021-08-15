@@ -12,20 +12,6 @@ internal abstract class ArgsMap {
     abstract fun get(key: String): Any?
     abstract fun isNotExist(key: String): Boolean
 
-    protected fun getOrCreateArgsBundle(f: Fragment): Bundle {
-        return when (val args = f.arguments) {
-            null -> Bundle().also { f.arguments = it }
-            else -> args
-        }
-    }
-
-    protected fun getOrCreateArgsIntent(a: AppCompatActivity): Intent {
-        return when (val args = a.intent) {
-            null -> Intent().also { a.intent = it }
-            else -> args
-        }
-    }
-
     companion object {
         fun isEmptyArguments(f: Fragment): Boolean {
             return f.arguments?.isEmpty.default(true)
@@ -36,6 +22,20 @@ internal abstract class ArgsMap {
             // getExtras() creates new instance every time if extras not null
             // so return false for compatibility
             return false
+        }
+
+        fun getOrCreateArgsBundle(f: Fragment): Bundle {
+            return when (val args = f.arguments) {
+                null -> Bundle().also { f.arguments = it }
+                else -> args
+            }
+        }
+
+        fun getOrCreateArgsIntent(a: AppCompatActivity): Intent {
+            return when (val args = a.intent) {
+                null -> Intent().also { a.intent = it }
+                else -> args
+            }
         }
     }
 }
