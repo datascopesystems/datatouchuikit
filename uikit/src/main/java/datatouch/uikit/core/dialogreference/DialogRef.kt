@@ -8,29 +8,26 @@ import datatouch.uikit.core.dialogreference.interfaces.IFragmentDialogRefPropert
 import datatouch.uikit.core.dialogreference.property.ActivityDialogRefProperty
 import datatouch.uikit.core.dialogreference.property.FragmentDialogRefProperty
 
-object DialogRef {
+/**
+ * Create reference to DialogFragment inside parent Fragment
+ *
+ * @param instanceCreator - lambda returns DialogFragment instance
+ * @return property which holds DialogFragment instance
+ */
+@Suppress("FunctionName")
+fun <T : DialogFragment> Fragment.DialogRef(instanceCreator: () -> T)
+: IFragmentDialogRefProperty<T> {
+    return FragmentDialogRefProperty(this, instanceCreator)
+}
 
-    /**
-     * Create reference to DialogFragment inside parent Fragment
-     *
-     * @param parentFragment - fragment which holds returned property
-     * @param instanceCreator - lambda returns DialogFragment instance
-     * @return property which holds DialogFragment instance
-     */
-    fun <T : DialogFragment> make(parentFragment: Fragment, instanceCreator: () -> T)
-            : IFragmentDialogRefProperty<T> {
-        return FragmentDialogRefProperty(parentFragment, instanceCreator)
-    }
-
-    /**
-     * Create reference to DialogFragment inside parent Activity
-     *
-     * @param parentActivity - activity which holds returned property
-     * @param instanceCreator - lambda returns DialogFragment instance
-     * @return property which holds DialogFragment instance
-     */
-    fun <T : DialogFragment> make(parentActivity: AppCompatActivity, instanceCreator: () -> T)
-    : IActivityDialogRefProperty<T> {
-        return ActivityDialogRefProperty(parentActivity, instanceCreator)
-    }
+/**
+ * Create reference to DialogFragment inside parent Activity
+ *
+ * @param instanceCreator - lambda returns DialogFragment instance
+ * @return property which holds DialogFragment instance
+ */
+@Suppress("FunctionName")
+fun <T : DialogFragment> AppCompatActivity.DialogRef(instanceCreator: () -> T)
+: IActivityDialogRefProperty<T> {
+    return ActivityDialogRefProperty(this, instanceCreator)
 }

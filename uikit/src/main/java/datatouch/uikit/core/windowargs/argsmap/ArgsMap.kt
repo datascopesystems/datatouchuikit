@@ -32,6 +32,9 @@ internal abstract class ArgsMap {
         }
 
         fun getOrCreateArgsIntent(a: AppCompatActivity): Intent {
+            // Also in this method we can initialize
+            // extra Bundle of intent, using intent.putExtra(...)
+            // just to be sure that extra Bundle is exists before activity starts
             return when (val args = a.intent) {
                 null -> Intent().also { a.intent = it }
                 else -> args

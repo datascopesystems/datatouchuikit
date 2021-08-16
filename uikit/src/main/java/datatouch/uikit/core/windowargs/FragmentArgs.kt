@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import datatouch.uikit.core.windowargs.argsmap.ArgsMap
 import datatouch.uikit.core.windowargs.interfaces.IFragmentArgProperty
 import datatouch.uikit.core.windowargs.converter.ArgsConverter
+import datatouch.uikit.core.windowargs.interfaces.IFragmentArguments
 import datatouch.uikit.core.windowargs.property.ListArgProperty
 import datatouch.uikit.core.windowargs.property.ListArgPropertyNullable
 import datatouch.uikit.core.windowargs.property.SerializableArgProperty
@@ -12,22 +13,31 @@ import datatouch.uikit.core.windowargs.property.SerializableArgPropertyNullable
 import java.io.Serializable
 import kotlin.reflect.KMutableProperty
 
-object FragmentArgs {
+
+/**
+ * Extension property which initialize fragment arguments Bundle
+ */
+val Fragment.FragmentArgs: IFragmentArguments get() {
+    FragmentArguments.initOnce(this)
+    return FragmentArguments
+}
+
+internal object FragmentArguments : IFragmentArguments {
 
     // If we add new function for new argument type
     // then we need to add corresponding putArg(...) Bundle extension
     // below in this file
 
-    fun <T : Serializable> of(arg: T): IFragmentArgProperty<T> =
+    override fun <T : Serializable> of(arg: T): IFragmentArgProperty<T> =
         SerializableArgProperty<T>().setInitialValue(arg)
 
-    fun <T : Serializable> ofNullable(arg: T? = null): IFragmentArgProperty<T?> =
+    override fun <T : Serializable> ofNullable(arg: T?): IFragmentArgProperty<T?> =
         SerializableArgPropertyNullable<T>().setInitialValue(arg)
 
-    fun <T : Serializable> ofList(arg: List<T> = listOf()): IFragmentArgProperty<List<T>> =
+    override fun <T : Serializable> ofList(arg: List<T>): IFragmentArgProperty<List<T>> =
         ListArgProperty<T>().setInitialValue(arg)
 
-    fun <T : Serializable> ofListNullable(arg: List<T>? = null): IFragmentArgProperty<List<T>?> =
+    override fun <T : Serializable> ofListNullable(arg: List<T>?): IFragmentArgProperty<List<T>?> =
         ListArgPropertyNullable<T>().setInitialValue(arg)
 
     /**
@@ -38,7 +48,7 @@ object FragmentArgs {
      * then we need to call f.setArguments(...) before fragment added to FragmentManager,
      * initOnce(...) will do that.
      */
-    fun initOnce(f: Fragment) = apply { ArgsMap.getOrCreateArgsBundle(f) }
+    internal fun initOnce(f: Fragment) = ArgsMap.getOrCreateArgsBundle(f)
 }
 
 // Fragment Arguments Bundle Extensions
