@@ -2,9 +2,11 @@ package datatouch.uikit.core.fragmentsignaling.consumer
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import datatouch.uikit.core.fragmentsignaling.interfaces.ISigFactoryOptions
 import kotlinx.coroutines.CoroutineScope
 
-internal class FragmentSignalConsumer : SignalConsumer() {
+internal class FragmentSignalConsumer(opt: ISigFactoryOptions) : SignalConsumer(opt) {
+
     private var fragment: Fragment? = null
 
     fun configure(fragment: Fragment) {
