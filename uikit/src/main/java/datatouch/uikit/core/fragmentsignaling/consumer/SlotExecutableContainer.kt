@@ -1,9 +1,11 @@
 package datatouch.uikit.core.fragmentsignaling.consumer
 
+import androidx.lifecycle.LifecycleOwner
 import datatouch.uikit.core.extensions.GenericExtensions.default
 import datatouch.uikit.core.fragmentsignaling.base.SigSlotId
 import datatouch.uikit.core.fragmentsignaling.base.SlotExecContext
 import datatouch.uikit.core.fragmentsignaling.interfaces.IDropableSignal
+import datatouch.uikit.core.fragmentsignaling.interfaces.ISigFactoryOptions
 import datatouch.uikit.core.fragmentsignaling.interfaces.ISigSlotExecutable
 import datatouch.uikit.core.fragmentsignaling.interfaces.ISignal
 import kotlinx.coroutines.*
@@ -12,15 +14,16 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 
-abstract class SlotExecutableContainer : IDropableSignal {
+abstract class SlotExecutableContainer(
+    private val opt: ISigFactoryOptions
+) : IDropableSignal {
 
     private var slots: MutableList<ISigSlotExecutable>? = null
 
-    protected var consumerName = ""
-        private set
+    private var consumerName = ""
 
-    protected fun setConsumerName(name: String?) {
-        consumerName = name.default("")
+    protected fun configureConsumerName(owner: LifecycleOwner) {
+        consumerName = owner.javaClass.name
     }
 
     private fun addExecutableInternal(executable: ISigSlotExecutable) {

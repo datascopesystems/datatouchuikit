@@ -11,7 +11,7 @@ import datatouch.uikitapp.databinding.FragmentSignalParentBinding
 
 class FSignalParent : DefaultFullScreenWindowUiBind<FragmentSignalParentBinding>() {
 
-    private val sc by SigFactory.slotContainerFragment()
+    private val sc by SigFactory.slotContainer()
 
     private var argFromActivity by FragmentArgs.of("Default value")
 

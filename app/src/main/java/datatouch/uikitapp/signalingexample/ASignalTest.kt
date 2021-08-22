@@ -14,7 +14,7 @@ import datatouch.uikitapp.R
 
 class ASignalTest : AppCompatActivity() {
 
-    private val sc by SigFactory.slotContainerActivity()
+    private val sc by SigFactory.slotContainer()
 
     private var arg by ActivityArgs.of("default qwerty")
 

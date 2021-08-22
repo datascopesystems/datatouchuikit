@@ -3,12 +3,13 @@ package datatouch.uikit.core.fragmentsignaling.consumer
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import datatouch.uikit.core.fragmentsignaling.interfaces.ISigFactoryOptions
 import datatouch.uikit.core.fragmentsignaling.viewmodel.SignalSharedViewModel
 import datatouch.uikit.core.fragmentsignaling.variation.slotcontainer.SlotCreationContainer
 import datatouch.uikit.core.fragmentsignaling.viewmodel.SignalViewModelProvider
 import kotlinx.coroutines.launch
 
-internal abstract class SignalConsumer : SlotCreationContainer() {
+internal abstract class SignalConsumer(opt: ISigFactoryOptions) : SlotCreationContainer(opt) {
 
     private var isObserverStarted = false
 
@@ -44,7 +45,7 @@ internal abstract class SignalConsumer : SlotCreationContainer() {
     protected fun startObserver(owner: LifecycleOwner) {
         if (isObserverStarted) return
 
-        setConsumerName(owner::class.simpleName)
+        configureConsumerName(owner)
 
         val lifecycle = owner.lifecycle
         if (lifecycle.currentState != Lifecycle.State.DESTROYED) {

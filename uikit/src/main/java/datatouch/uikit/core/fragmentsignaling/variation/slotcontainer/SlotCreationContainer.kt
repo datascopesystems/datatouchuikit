@@ -1,12 +1,13 @@
 package datatouch.uikit.core.fragmentsignaling.variation.slotcontainer
 
 
+import datatouch.uikit.core.fragmentsignaling.interfaces.ISigFactoryOptions
 import datatouch.uikit.core.fragmentsignaling.variation.builders.BuilderSlot0
 import datatouch.uikit.core.fragmentsignaling.variation.builders.BuilderSlot1
 import datatouch.uikit.core.fragmentsignaling.variation.builders.BuilderSlot2
 
 
-abstract class SlotCreationContainer : SlotContainer() {
+abstract class SlotCreationContainer(opt: ISigFactoryOptions) : SlotContainer(opt) {
 
     /**
      *  Create slot builder for signal with no params

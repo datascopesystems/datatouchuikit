@@ -3,6 +3,7 @@ package datatouch.uikit.core.fragmentsignaling.variation.slotcontainer
 import datatouch.uikit.core.fragmentsignaling.base.SigSlotProperty
 import datatouch.uikit.core.fragmentsignaling.base.SlotExecContext
 import datatouch.uikit.core.fragmentsignaling.consumer.SlotExecutableContainer
+import datatouch.uikit.core.fragmentsignaling.interfaces.ISigFactoryOptions
 import datatouch.uikit.core.fragmentsignaling.variation.sigfun.*
 import datatouch.uikit.core.fragmentsignaling.variation.slots.*
 import datatouch.uikit.core.fragmentsignaling.variation.slots.SigSlot0
@@ -10,7 +11,7 @@ import datatouch.uikit.core.fragmentsignaling.variation.slots.SigSlot1
 import datatouch.uikit.core.fragmentsignaling.variation.slots.SigSlot2
 
 
-abstract class SlotContainer : SlotExecutableContainer() {
+abstract class SlotContainer(opt: ISigFactoryOptions) : SlotExecutableContainer(opt) {
 
     @Suppress("UNCHECKED_CAST")
     internal fun <R, F : ISignalFunction0> addSlot(slotContext: SlotExecContext, call: SigSlotCall0<R>)
