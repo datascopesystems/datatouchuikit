@@ -38,13 +38,6 @@ abstract class WizardCompletableFragment<TStepResult> : SuperWizardFragment<TSte
 
     abstract fun getStepResult(): StepFragmentResult
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        getLogic()?.apply {
-            onEvents(this) { handleUiEvent(it) }
-        }
-    }
-
     protected open fun provideRootView(viewBinding: ViewBinding?): View? {
         return viewBinding?.root
     }
