@@ -76,9 +76,6 @@ class FSignalSender : DefaultFullScreenWindowUiBind<FragmentSignalSenderBinding>
             .putArg(FSignalSender::testArg, listOf("aaaaaa"))
     }
 
-
-    override fun inject() {}
-
     override fun getWindowTitle() = R.string.no_title
 
     override var appBackgroundBundle: AppBackgroundBundle?

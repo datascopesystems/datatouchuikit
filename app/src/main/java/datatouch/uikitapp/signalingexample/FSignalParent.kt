@@ -82,9 +82,6 @@ class FSignalParent : DefaultFullScreenWindowUiBind<FragmentSignalParentBinding>
         return@of (a + b).toFloat()
     }
 
-
-    override fun inject() {}
-
     override fun getWindowTitle() = R.string.no_title
 
     override var appBackgroundBundle: AppBackgroundBundle?

@@ -6,9 +6,4 @@ class FTestWizard : FWizard() {
 
     override var appBackgroundBundle: AppBackgroundBundle? = null
 
-    override fun inject() {
-
-    }
-
-
 }

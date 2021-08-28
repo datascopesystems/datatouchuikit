@@ -18,7 +18,4 @@ class FQaErrorNotification : PopUpWindowUiBind<QaFragmentErrorBinding>() {
     fun btnOk() {
         dismiss()
     }
-
-    override fun inject() {}
-
 }

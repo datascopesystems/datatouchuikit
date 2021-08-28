@@ -71,6 +71,4 @@ class FBlockingProgress() : PopUpWindowUiBind<DialogBlockingProgressBinding>() {
     fun withDialogCancelable(cancelable: Boolean) = apply {
         isDialogCancelable = cancelable
     }
-
-    override fun inject() {}
 }
