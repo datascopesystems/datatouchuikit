@@ -42,6 +42,7 @@ abstract class FragmentWindow : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        forceInject()
         getLogic()?.apply {
             onEvents(this) { handleUiEvent(it) }
             onStates(this) { handleUiState(it) }
@@ -133,4 +134,6 @@ abstract class FragmentWindow : DialogFragment() {
         val imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view?.rootView?.windowToken, 0)
     }
+
+    protected open fun forceInject() { }
 }

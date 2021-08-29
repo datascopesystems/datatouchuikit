@@ -41,7 +41,7 @@ abstract class AppFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inject()
+        forceInject()
         getLogic()?.apply {
             onEvents(this) { handleUiEvent(it) }
             onStates(this) { handleUiState(it) }
@@ -83,6 +83,6 @@ abstract class AppFragment : Fragment() {
         currentFragment = null
     }
 
-    protected abstract fun inject()
+    protected abstract fun forceInject()
 
 }
