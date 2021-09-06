@@ -3,5 +3,7 @@
     <declare-styleable name="ToggleButtonSmall">
         <attr name="tbs_checked" format="boolean" />
         <attr name="tbs_locked" format="boolean" />
+        <attr name="tbs_active_background" format="reference" />
+        <attr name="tbs_inactive_background" format="reference" />
     </declare-styleable>
 </resources>

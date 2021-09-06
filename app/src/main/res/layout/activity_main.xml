@@ -1,17 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_light_transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary"
     android:orientation="vertical">
 
-  <datatouch.uikit.components.edittext.FormEditText
-      android:id="@+id/fet1"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-
-  <datatouch.uikit.components.edittext.FormEditText
-      android:id="@+id/fet2"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
+  <datatouch.uikit.components.buttons.ToggleButtonSmall
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:tbs_active_background="@drawable/toggle_button_background_dark_active"
+      app:tbs_inactive_background="@drawable/toggle_button_background_dark_inactive"
+      app:tbs_checked="false" />
 
 </LinearLayout>

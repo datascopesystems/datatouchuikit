@@ -1,6 +1,7 @@
 package datatouch.uikit.components.buttons
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -8,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import androidx.annotation.StyleableRes
-import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiCallback
 import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.extensions.ContextExtensions.drawable
 import datatouch.uikit.databinding.ActionToggleButtonSmallBinding
 
 class ToggleButtonSmall : RelativeLayout {
@@ -25,13 +26,24 @@ class ToggleButtonSmall : RelativeLayout {
     var onCheckChangedCallback: UiCallback<Boolean>? = null
     var onLockedCallback: UiJustCallback? = null
 
+    private val defaultActiveBackground by lazy {
+        context?.drawable(R.drawable.toggle_button_background_active)
+    }
+
+    private val defaultInactiveBackground by lazy {
+        context?.drawable(R.drawable.toggle_button_background_inactive)
+    }
+
+    var activeBackground: Drawable? = null
+    var inactiveBackground: Drawable? = null
+
     var checked = false
         set(value) {
             field = value
-            ui.flRoot.setBackgroundResource(
-                if (value) R.drawable.toggle_button_background_active
-                else R.drawable.toggle_button_background_inactive
-            )
+            ui.flRoot.background =
+                if (value) activeBackground
+                else inactiveBackground
+
             refreshLockView()
         }
 
@@ -98,6 +110,15 @@ class ToggleButtonSmall : RelativeLayout {
         try {
             checked = typedArray.getBoolean(R.styleable.ToggleButtonSmall_tbs_checked, false)
             locked = typedArray.getBoolean(R.styleable.ToggleButtonSmall_tbs_locked, false)
+
+            activeBackground =
+                typedArray.getDrawable(R.styleable.ToggleButtonSmall_tbs_active_background)
+                    ?: defaultActiveBackground
+
+            inactiveBackground =
+                typedArray.getDrawable(R.styleable.ToggleButtonSmall_tbs_inactive_background)
+                    ?: defaultInactiveBackground
+
         } finally {
             typedArray.recycle()
         }
