@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import androidx.annotation.StyleableRes
+import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiCallback
 import datatouch.uikit.core.callbacks.UiJustCallback
