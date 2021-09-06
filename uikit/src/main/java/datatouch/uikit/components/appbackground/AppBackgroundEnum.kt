@@ -1,7 +1,7 @@
 package datatouch.uikit.components.appbackground
 
 enum class AppBackgroundEnum(private val value: Int) {
-    CityOfLondon(0), RiverThames(1), ModernLondon(2), NewYork(3);
+    CityOfLondon(0), RiverThames(1), ModernLondon(2), NewYork(3), ManchesterVicOle(4);
 
     fun toInt() = value
 
@@ -12,6 +12,7 @@ enum class AppBackgroundEnum(private val value: Int) {
                 1 -> RiverThames
                 2 -> ModernLondon
                 3 -> NewYork
+                4 -> ManchesterVicOle
                 else -> CityOfLondon
             }
         }

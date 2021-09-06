@@ -50,6 +50,10 @@ class AppBackground private constructor(
                         R.drawable.app_background_new_york,
                         R.drawable.app_background_blur_new_york))
 
+                list.add(AppBackground(AppBackgroundEnum.ManchesterVicOle, "Manchester Vic OLE Installation",
+                        R.drawable.app_background_vic_ole_installation,
+                        R.drawable.app_background_blur_vic_ole_installation))
+
                 return list
             }
         }
